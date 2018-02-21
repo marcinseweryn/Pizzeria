@@ -2,7 +2,7 @@
 
 class Product{
     
-    public $id;
+    public $productID;
     public $category;
     public $name;
     public $price;

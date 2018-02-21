@@ -3,7 +3,7 @@ $conf->debug = true; // set true during development and use in your code (for in
 // ---- Main webapp configuration
 $conf->server_name = 'localhost'; // server address and port
 $conf->protocol = 'http';         // http or https
-$conf->app_root = '/pizzeria';   // project folder - relative to server apps folder
+$conf->app_root = '/Pizzeria/pizzeria';   // project folder - relative to server apps folder
 $conf->action_param = 'a';        // action parameter name
 $conf->action_script = '/ctrl.php'; // main action script with location
 

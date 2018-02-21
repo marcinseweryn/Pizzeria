@@ -32,7 +32,7 @@
                   </div>
                   <div class="menu-content">
                   
-                  <form action="{$conf->action_root}user/order/pizza" method="post">
+                  <form action="{$conf->action_root}user/order" method="post">
                   {foreach $pizzas as $pizza}
 					{strip}
                       <div class="row">
@@ -41,31 +41,31 @@
                           </div>
                           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                               <div class="dish-content">
-                                  <h5 class="dish-title"><a href="#">{$pizza["name"]}</a></h5>
-                                  <span class="dish-meta">{$pizza["description"]}</span>
+                                  <h5 class="dish-title"><a href="#">{$pizza->name}</a></h5>
+                                  <span class="dish-meta">{$pizza->description}</span>
                                  
                                </div>
                            </div>
                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-3">
-                                   <div class="dish-price">
-                                   	<p>${$pizza["price"]*0.7}</p>
-                               	</div>
+                                    <div class="dish-price">
+                                   		<p>${$pizza->price*0.7}</p>
+                               		</div>
                                </div>
                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-3">
-                               	<div class="dish-price">
-                                   	<p>${$pizza["price"]}</p>
+                               		<div class="dish-price">
+                                   		<p>${$pizza->price}</p>
                               		</div>
                               	</div>
-                              	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3">
-                               	<div class="dish-price">
-                                   	<p>${$pizza["price"]*1.4}</p>
-                               	</div>
-                               </div>
-                               <div class="col-lg-1 col-md-1 col-sm-1 col-xs-3">
+                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-3">
+                               		<div class="dish-price">
+                                   		<p>${$pizza->price*1.4}</p>
+                               		</div>
+                                </div>
+                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-3">
                               		<span class="fa fa-star checked"></span>
-                               </div>
+                                </div>
 								<div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-			                  		<button name="pizzaID" value="{$pizza["product_id"]}">order</button>
+			                  		<button name="productID" value="{$pizza->productID}">order</button>
 								</div>
                       </div>
                       {/strip}

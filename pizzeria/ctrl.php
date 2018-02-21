@@ -26,10 +26,18 @@ switch ($action){
 		control('/controllers/user/','MenuController','generateView',['user']);
 	case 'user/orders':
 	    control('/controllers/user/','OrdersController','generateView',['user']);
-	case 'user/order/pizza':
+	case 'user/order':
 	    control('/controllers/user/','OrdersController','generateView',['user']);
-	case 'personListPart': //AJAX - wysłanie samej tabeli HTMLowej
-		control('/app/person/list/','PersonListCtrl','goShowPart');
+	case 'user/order/add':
+	    control('/controllers/user/','OrdersController','addToOrder',['user']);
+	case 'user/order/remove':
+	    control('/controllers/user/','OrdersController','removeFromOrder',['user']);
+	case 'user/order/send':
+	    control('/controllers/user/','OrdersController','sendOrder',['user']);
+	case 'user/order/confirm':
+	    control('/controllers/user/','ConfirmOrderController','generateView',['user']);
+	case 'user/order/completed':
+	    control('/controllers/user/','CompletedOrderController','generateView',['user']);
 	default :
 		control('/controllers/main/','HomeController','generateView');
 }

@@ -1,27 +1,57 @@
 <?php
+require_once dirname(__FILE__).'/../model/Product.php';
 
 class ProductDAO{ 
     
-    function getAllPizzas(){
+    public function findAllPizzas(){
         
-        $pizzas = getDB()->select("product", [
+        $records = getDB()->select("product", [
             "product_id",
             "category",
             "name",
             "price",
             "description",
         ], ["category" => "pizza"]);
-         
-        return $pizzas;
+        
+        if($records != NULL){
+            $prizzas =[];
+            foreach ($records as $record){
+                $pizza = new Product();
+                $pizza->productID = $record["product_id"];
+                $pizza->category = $record["category"];
+                $pizza->name = $record["name"];
+                $pizza->price = $record["price"];
+                $pizza->description = $record["description"];
+                
+                $pizzas[] = $pizza;
+            }
+            
+            return $pizzas;
+        }else{
+            return NULL;
+        }
     }
     
-    function getProductByID($productID){
-        $pizza = getDB()->select("product", [
+    public function findProductByID($productID){
+        $record = getDB()->get("product", [
             "product_id",
             "category",
             "name",
             "price",
             "description",
-        ], ["category" => "pizza"]);
+        ], ["product_id" => $productID]);
+        
+        if($record != NULL){
+            $pizza = new Product();
+            $pizza->productID = $record["product_id"];
+            $pizza->category = $record["category"];
+            $pizza->name = $record["name"];
+            $pizza->price = $record["price"];
+            $pizza->description = $record["description"];
+            
+            return $pizza;
+        }else{
+            return NULL;
+        }
     }
 }

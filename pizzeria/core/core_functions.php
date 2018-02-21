@@ -68,6 +68,12 @@ function control($path,$controller,$method,$roles = null){
 	}
 	exit;
 }
+function saveToSessionUserID($userID){
+    $_SESSION['userID'] = $userID;
+}
+function getFromSessionUserID(){
+    return $_SESSION['userID'];
+}
 function addRole($role){
 	getConf()->roles [] = $role;
 	$_SESSION['_roles'] = serialize(getConf()->roles);

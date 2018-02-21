@@ -2,6 +2,7 @@
 
 class User{
     
+    public $userID;
     public $name;
     public $surname;
     public $password;
@@ -10,5 +11,6 @@ class User{
     public $postalCode;
     public $phone;
     public $email;
+    public $role;
     
 }

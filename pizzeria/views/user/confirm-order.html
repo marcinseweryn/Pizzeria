@@ -9,76 +9,86 @@
             <div class="box">
             	<div class="row">
 	                <div class="section-title">
-	                    <h2>{$product->name}</h2>
-	                    <h4>{$product->description}</h4>
+						<h2>Delivery method</h2>
 	                </div>
 	             </div>
-
-	            <div class="menu-block">   
-				<div class="row">
-	                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-						<div class="dish-price">
-		                	<p>${$product->price*0.7}</p>
-		                </div>
-	                </div>   
-	                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-		                <div class="dish-price">
-		                	<p>${$product->price*1}</p>
-		                </div>
-	                </div>
-	                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-		                <div class="dish-price">
-		                	<p>${$product->price*1.4}</p>
-		                </div>
-	                </div>
-                </div>
-                </div>
-
-				<form action="{$conf->action_root}user/order/add" method="post">
+	             	<script type="text/javascript">
+						function checkDelivery() {
+						    if (document.getElementById('yesCheck').checked) {
+						        document.getElementById('address').style.display = 'block';
+						        document.getElementById('buttons').style.display = 'block';
+						    }
+						    else {
+							    document.getElementById('address').style.display = 'none';
+							    document.getElementById('buttons').style.display = 'block';
+						    }		
+						}
+					</script>
+					
+				<form action="{$conf->action_root}user/order/completed" method="post">
 				<div class="menu-block mb-5">
 				<div class="row">
-					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+	                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 	                    <div class="radio">
 	                        <label>
-	                            <input type="radio" name="size" value="S">
-	                            <span>Small(25cm)</span>
+	                            <input id="yesCheck" type="radio" name="delivery" value="Yes" onclick="javascript:checkDelivery();">
+	                            <span>Delivery of pizza to address</span>
 	                        </label>
 	                    </div>
 	                </div>
-	                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+	                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 	                    <div class="radio">
 	                        <label>
-	                            <input type="radio" name="size" value="M" checked>
-	                            <span>Medium(35cm)</span>
-	                        </label>
-	                    </div>
-	                </div>
-	                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-	                    <div class="radio">
-	                        <label>
-	                            <input type="radio" name="size" value="L">
-	                            <span>Large(45cm)</span>
+	                            <input type="radio" name="delivery" value="No" onclick="javascript:checkDelivery();">
+	                            <span>Pickup in a pizzeria</span>
 	                        </label>
 	                    </div>
 	                </div>
           		</div>  
 				</div>
+	            <div id="address" class="menu-block" style="display: none">
+				<div class="row">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+	                    <div class="form-group">
+	                        <label class="control-label sr-only" for="city"> City</label>
+	                        <input id="city" type="text" placeholder="City" class="form-control" required
+	                        	name="city" value="{$user->city}">
+	                    </div>
+	                </div>
+	                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+	                    <div class="form-group">
+	                        <label class="control-label sr-only" for="address"> Address</label>
+	                        <input id="address" type="text" placeholder="Address" class="form-control" required
+	                        	name="address" value="{$user->address}">
+	                    </div>
+	                </div>
+	                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+	                    <div class="form-group">
+	                        <label class="control-label sr-only" for="postalCode"> Postal code</label>
+	                        <input id="postalCode" type="text" placeholder="Postal Code" class="form-control" required
+	                        	name="postalCode" value="{$user->postalCode}">
+	                    </div>
+	                </div>
+		  
+                </div>
+                </div>
 				
-				<div class="menu-block mb-2">
+				<div id="buttons" class="menu-block mb-2" style="display: none">
 				<div class="row"> 
 					
 						<input type="hidden" name="productID" value="{$product->productID}">
 						
 						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-							<button class="btn btn-success btn-lg" name="action" value="add">Add to order</button> 
+							<button class="btn btn-success btn-lg" name="action" value="order">Order now</button> 
 						</div>
+			</form>
+						<form action="{$conf->action_root}user/menu" method="post">
 						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-							<button class="btn btn-info btn-lg" name="action" value="back">Back to menu</button> 
+							<button class="btn btn-info btn-lg">Back to menu</button> 
 						</div>
-					   
+						</form> 
 				</div>
-				</div>
-				</form>        			  
+				</div>        			  
 			</div>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -98,11 +108,10 @@
 		                                    <th>Product</th>
 		                                    <th class="text-center">Size</th>
 		                                    <th class="text-center">Price</th>
-		                                    <th class="text-center">Remove</th>
 		                                </tr>
 		                            </thead>
 		                            <tbody>
-	               					<form action="{$conf->action_root}user/order/remove" method="post">
+	               					<form action="{$conf->action_root}user/order/pizza/remove" method="post">
 		                           		<input type="hidden" name="productID" value="{$product->productID}">
 			                            {foreach $orderProductsDetails as $orderProduct}
 										{strip}
@@ -119,12 +128,6 @@
 			                                   		 <td class="text-center">{$orderProduct["price"]*1.4}</td>
 			                                   		 {$sum = $sum + $orderProduct["price"]*1.4}
 			                                    {/if}
-			                                    <td class="text-center">
-			                                    	<button name="remove" value="{$orderProduct["order_product_id"]}" 
-			                                    	   style="background:transparent; border:none;" >
-			                                    		<span class="glyphicon glyphicon-remove" style="color:#c94c4c;"></span>
-			                                    	</button>
-											    </td>
 			                                </tr>
 			                            {/strip}
 										{/foreach}
@@ -146,19 +149,6 @@
 	                	</div>   
 					</div>
 					</div>
-					
-		           	<div class="menu-block mb-2">
-					<div class="row"> 
-						<form action="{$conf->action_root}user/order/send" method="post">
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-								<button class="btn btn-success btn-lg" name="action" value="order">Send order</button> 
-							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-								<button class="btn btn-danger btn-lg" name="action" value="cancel">Cancel order</button> 
-							</div>  
-						</form>   
-					</div>
-					</div>  
 					
 		    	</div>
 		    	</div>

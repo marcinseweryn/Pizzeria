@@ -5,20 +5,22 @@ require_once dirname(__FILE__).'/../../service/UserService.php';
 class LoginController{
     
     private $user;
+    private $userService;
     
-    public function generateView(){
-        
+    public function __construct(){
         $this->user = new User();
+        $this->userService = new UserService();
+    }
+    
+    public function generateView(){  
         
         getSmarty()->assign('user',$this->user);         
         getSmarty()->display(getConf()->root_path.'/views/main/login.html');
     }
     
     public function loginToPizzeria(){
-        
-        $userService = new UserService();
-        
-        if($userService->checkLoginData()=== "user"){
+    
+        if($this->userService->checkLoginData()=== "user"){
             redirectTo("user/home");
         }else{
             redirectTo("login");
