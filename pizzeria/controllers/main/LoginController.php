@@ -20,8 +20,12 @@ class LoginController{
     
     public function loginToPizzeria(){
     
-        if($this->userService->checkLoginData()=== "user"){
+        $role = $this->userService->checkLoginData();
+        
+        if($role === "user"){
             redirectTo("user/home");
+        }else if($role === "admin"){
+            redirectTo("admin/home");
         }else{
             redirectTo("login");
         }

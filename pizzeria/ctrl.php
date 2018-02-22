@@ -20,6 +20,7 @@ switch ($action){
 		control('/controllers/main/','LoginController','loginToPizzeria');
 	case 'logoff':
 	    control('/controllers/main/','LoginController','logoff');
+	        
 	case 'user/home':
 		control('/controllers/user/','HomeController','generateView',['user']);
 	case 'user/menu':
@@ -36,8 +37,25 @@ switch ($action){
 	    control('/controllers/user/','OrdersController','sendOrder',['user']);
 	case 'user/order/confirm':
 	    control('/controllers/user/','ConfirmOrderController','generateView',['user']);
-	case 'user/order/completed':
+	case 'user/order/completed':   
+	    
 	    control('/controllers/user/','CompletedOrderController','generateView',['user']);
+	case 'admin/home':
+	    control('/controllers/admin/','HomeController','generateView',['admin']);
+	case 'admin/products':
+	    control('/controllers/admin/','ProductsController','generateView',['admin']);
+	case 'admin/history':
+	    control('/controllers/admin/','HistoryController','generateView',['admin']);
+	case 'admin/orders/waiting-orders':
+	    control('/controllers/admin/orders/','WaitingOrdersController','generateView',['admin']);
+	case 'admin/orders/queue-of-orders':
+	    control('/controllers/admin/orders/','QueueOfOrdersController','generateView',['admin']);
+	case 'admin/orders/preparing-orders':
+	    control('/controllers/admin/orders/','PreparingOrdersController','generateView',['admin']);
+	case 'admin/orders/ready-orders':
+	    control('/controllers/admin/orders/','ReadyOrdersController','generateView',['admin']);
+	case 'admin/orders/sended-orders':
+	    control('/controllers/admin/orders/','SendedOrdersController','generateView',['admin']);
 	default :
 		control('/controllers/main/','HomeController','generateView');
 }
