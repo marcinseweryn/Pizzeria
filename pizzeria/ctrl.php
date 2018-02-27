@@ -56,6 +56,10 @@ switch ($action){
 	    control('/controllers/admin/orders/','ReadyOrdersController','generateView',['admin']);
 	case 'admin/orders/sended-orders':
 	    control('/controllers/admin/orders/','SendedOrdersController','generateView',['admin']);
+	case 'admin/orders/order-details':
+	    control('/controllers/admin/orders/','OrderDetailsController','generateView',['admin']);
+	case 'admin/orders/order-details-state':
+	    control('/controllers/admin/orders/','OrderDetailsController','action',['admin']);
 	default :
 		control('/controllers/main/','HomeController','generateView');
 }

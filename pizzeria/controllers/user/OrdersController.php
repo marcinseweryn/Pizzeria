@@ -19,7 +19,12 @@ class OrdersController{
     public function generateView(){
         $userID = getFromSessionUserID();
         $order = $this->orderDAO->findUncompletedOrderByUserID($userID);
-        $orderProductsDetails = $this->orderProductDAO->findOrderProductDetailsByOrderID($order->orderID);
+        
+        if($order == NULL){
+            $orderProductsDetails = NULL;
+        }else{
+            $orderProductsDetails = $this->orderProductDAO->findOrderProductDetailsByOrderID($order->orderID);
+        }
         
         getSmarty()->assign('orderProductsDetails',$orderProductsDetails); 
         getSmarty()->assign('product',$this->productDAO->findProductByID(getFromRequest("productID")));
