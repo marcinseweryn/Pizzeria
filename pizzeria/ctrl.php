@@ -50,12 +50,20 @@ switch ($action){
 	    control('/controllers/admin/orders/','WaitingOrdersController','generateView',['admin']);
 	case 'admin/orders/queue-of-orders':
 	    control('/controllers/admin/orders/','QueueOfOrdersController','generateView',['admin']);
+	case 'admin/orders/queue-of-orders-preparing':
+	    control('/controllers/admin/orders/','QueueOfOrdersController','prepareOrder',['admin']);
 	case 'admin/orders/preparing-orders':
 	    control('/controllers/admin/orders/','PreparingOrdersController','generateView',['admin']);
+	case 'admin/orders/preparing-orders-ready':
+	    control('/controllers/admin/orders/','PreparingOrdersController','orderReady',['admin']);
 	case 'admin/orders/ready-orders':
 	    control('/controllers/admin/orders/','ReadyOrdersController','generateView',['admin']);
+	case 'admin/orders/ready-orders-action':
+	    control('/controllers/admin/orders/','ReadyOrdersController','action',['admin']);
 	case 'admin/orders/sended-orders':
 	    control('/controllers/admin/orders/','SendedOrdersController','generateView',['admin']);
+	case 'admin/orders/sended-orders-action':
+	    control('/controllers/admin/orders/','SendedOrdersController','action',['admin']);
 	case 'admin/orders/order-details':
 	    control('/controllers/admin/orders/','OrderDetailsController','generateView',['admin']);
 	case 'admin/orders/order-details-state':

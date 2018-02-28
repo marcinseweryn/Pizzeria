@@ -21,7 +21,7 @@ echo '<h6 class="dropdown-header">New Orders: </h6>
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
-        echo '<a class="dropdown-item" href="#">
+        echo '<a class="dropdown-item" href="/Pizzeria/pizzeria/ctrl.php?a=admin/orders/waiting-orders">
               <strong>Order '.$row["order_id"].'</strong>
               <span class="small float-right text-muted">'.$row["date"].'</span>
               <div class="dropdown-message small">New order</div>

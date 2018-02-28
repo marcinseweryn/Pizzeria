@@ -2,8 +2,45 @@
 
 {block name=content}
 <div class="col-12">
-  <h1>Blank</h1>
-  <p>This is an example of a blank page that you can use as a starting point for creating new ones.</p>
+	<div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Queue of orders</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Surname</th>
+                  <th>Date</th>
+                  <th>Preparing</th>
+                  <th>Show</th>
+                </tr>
+              </thead>
+              <tbody>
+              	<form id="show" action="{$conf->action_root}admin/orders/order-details" method="post">
+	              	<input type="hidden" name="from" value="queue" />
+	            </form>
+	            <form id="preparing" action="{$conf->action_root}admin/orders/queue-of-orders-preparing" method="post">
+	              	
+	            </form>
+	              	{foreach $orderDetails as $orderDetail}
+					{strip}
+	                <tr>
+	                  <td>{$orderDetail["order_id"]}</td>
+	                  <td>{$orderDetail["surname"]}</td>
+	                  <td>{$orderDetail["date"]}</td>
+	                  <td><button form="preparing" name="orderID" value="{$orderDetail['order_id']}" class="btn btn-success btn-block">Preparing</button></td>
+	                  <td><button form="show" name="orderID" value="{$orderDetail['order_id']}" class="btn btn-primary btn-block">Show</button></td>
+	                </tr>
+	                {/strip}
+	                {/foreach}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer small text-muted"></div>
+    </div>
 </div>
 
 {/block}

@@ -18,7 +18,7 @@ class CompletedOrderController{
             $delivery = "Pickup in a pizzeria";
         }
         
-        $order = $this->orderDAO->findUncompletedOrderByUserID(getFromSessionUserID());
+        $order = $this->orderDAO->findNewOrderByUserID(getFromSessionUserID());
         $this->orderDAO->updateOrderStateDeliveryByOrderID("waiting", $delivery, $order->orderID);
         
         getSmarty()->display(getConf()->root_path.'/views/user/completed-order.html');

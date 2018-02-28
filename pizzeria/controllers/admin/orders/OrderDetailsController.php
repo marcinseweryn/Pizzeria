@@ -1,5 +1,4 @@
 <?php
-require_once dirname(__FILE__).'/../../../DAO/ProductDAO.php';
 require_once dirname(__FILE__).'/../../../DAO/OrderDAO.php';
 require_once dirname(__FILE__).'/../../../DAO/OrderProductDAO.php';
 require_once dirname(__FILE__).'/../../../DAO/UserDAO.php';
@@ -9,13 +8,11 @@ class OrderDetailsController{
     private $orderProductDAO;
     private $orderDAO;
     private $userDAO;
-    private $productDAO;
     
     public function __construct(){
         $this->orderProductDAO = new OrderProductDAO();
         $this->orderDAO = new OrderDAO();
         $this->userDAO = new UserDAO();
-        $this->productDAO = new ProductDAO();
     }
     
     public function generateView(){
@@ -42,6 +39,14 @@ class OrderDetailsController{
         
         if($from === "waiting"){
             redirectTo("admin/orders/waiting-orders");
+        }else if($from === "queue"){
+            redirectTo("admin/orders/queue-of-orders");
+        }else if($from === "preparing"){
+            redirectTo("admin/orders/preparing-orders");
+        }else if($from === "ready"){
+            redirectTo("admin/orders/ready-orders");
+        }else if($from === "sended"){
+            redirectTo("admin/orders/sended-orders");
         }
     }
 }

@@ -18,7 +18,7 @@ class OrdersController{
     
     public function generateView(){
         $userID = getFromSessionUserID();
-        $order = $this->orderDAO->findUncompletedOrderByUserID($userID);
+        $order = $this->orderDAO->findNewOrderByUserID($userID);
         
         if($order == NULL){
             $orderProductsDetails = NULL;
@@ -37,11 +37,11 @@ class OrdersController{
         if(getFromPost("action")==="add"){
 
             $userID = getFromSessionUserID();            
-            $order = $this->orderDAO->findUncompletedOrderByUserID($userID);
+            $order = $this->orderDAO->findNewOrderByUserID($userID);
 
             if($order==NULL){
                 $this->orderDAO->createNewOrderByUserID($userID);
-                $order = $this->orderDAO->findUncompletedOrderByUserID($userID);
+                $order = $this->orderDAO->findNewOrderByUserID($userID);
             }
             
             $orderProduct = new OrderProduct();
@@ -68,7 +68,7 @@ class OrdersController{
         if(getFromPost("action")==="order"){
             forwardTo("user/order/confirm");
         }else{
-            $order = $this->orderDAO->findUncompletedOrderByUserID(getFromSessionUserID());
+            $order = $this->orderDAO->findNewOrderByUserID(getFromSessionUserID());
             $this->orderProductDAO->deleteProductFromOrderProductByOrderID($order->orderID);
             forwardTo("user/menu");
         }

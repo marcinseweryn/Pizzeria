@@ -32,12 +32,12 @@ class OrderDAO{
         getDB()->insert("order", [
             "user_id" => $userID,
             "date" => date('Y-m-d H:i:s'),
-            "delivery" => "uncompleted",
-            "state" => "uncompleted"
+            "delivery" => "new",
+            "state" => "new"
         ]);   
     }
     
-    public function findUncompletedOrderByUserID($userID){
+    public function findNewOrderByUserID($userID){
         
         $record = getDB()->get("order", [
             "order_id",
@@ -45,7 +45,7 @@ class OrderDAO{
             "date",
             "state",
             "delivery"
-        ], ["state" => "uncompleted"]);
+        ], ["state" => "new"]);
         
         if($record != NULL){
             $order = new Order();

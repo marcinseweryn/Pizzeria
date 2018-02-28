@@ -21,7 +21,7 @@ class ConfirmOrderController{
     
     public function generateView(){
         $userID = getFromSessionUserID();
-        $order = $this->orderDAO->findUncompletedOrderByUserID($userID);
+        $order = $this->orderDAO->findNewOrderByUserID($userID);
         $orderProductsDetails = $this->orderProductDAO->findOrderProductDetailsByOrderID($order->orderID);
         $user = $this->userDAO->findUserByID($userID);    
         

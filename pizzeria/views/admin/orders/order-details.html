@@ -55,9 +55,26 @@
   	<form action="{$conf->action_root}admin/orders/order-details-state" method="post">
   		<input type="hidden" name="from" value="{$from}" />
   		<input type="hidden" name="orderID" value="{$order->orderID}" />
-	 	<button name="state" value="preparing" class="btn btn-success btn-lg">Preparing</button>
-	 	<button name="state" value="queue" class="btn btn-info btn-lg">Add to queue</button>
-	 	<button name="state" value="reject" class="btn btn-danger btn-lg">Reject</button>
+  		{if $from == 'waiting'}
+		 	<button name="state" value="preparing" class="btn btn-success  btn-block">Preparing</button>
+		 	<button name="state" value="queue" class="btn btn-info  btn-block">Add to queue</button>
+		 	<button name="state" value="reject" class="btn btn-danger  btn-block">Reject</button>
+	 	{/if}
+	 	{if $from == 'queue'}
+	 		<button name="state" value="preparing" class="btn btn-success  btn-block">Preparing</button>
+	 	{/if}
+	 	{if $from == 'preparing'}
+	 		<button name="state" value="ready" class="btn btn-success btn-block">Completed</button>
+	 	{/if}
+	 	{if $from == 'ready'}
+	 		<button name="state" value="sended" class="btn btn-info btn-block">Delivery</button>
+	 		<button name="state" value="completed" class="btn btn-success btn-block">Completed</button>
+	 		<button name="state" value="uncompleted" class="btn btn-danger btn-block">Uncompleted</button>
+	 	{/if}
+	 	{if $from == 'sended'}
+	 		<button name="state" value="completed" class="btn btn-success btn-block">Completed</button>
+	 		<button name="state" value="uncompleted" class="btn btn-danger btn-block">Uncompleted</button>
+	 	{/if}
 	 </form>
   <hr>
   
