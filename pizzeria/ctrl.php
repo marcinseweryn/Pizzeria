@@ -44,6 +44,8 @@ switch ($action){
 	    control('/controllers/admin/','HomeController','generateView',['admin']);
 	case 'admin/products':
 	    control('/controllers/admin/','ProductsController','generateView',['admin']);
+	case 'admin/products-action':
+	    control('/controllers/admin/','ProductsController','action',['admin']);
 	case 'admin/history':
 	    control('/controllers/admin/','HistoryController','generateView',['admin']);
 	case 'admin/orders/waiting-orders':

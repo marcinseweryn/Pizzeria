@@ -13,7 +13,7 @@ class CompletedOrderController{
         
         $delivery;
         if(getFromPost("delivery") === "Yes"){
-            $delivery = getFromPost("city")." ".getFromPost("address")." ".getFromPost("postalCode");
+            $delivery = getFromPost("city").", ".getFromPost("address");
         }else{
             $delivery = "Pickup in a pizzeria";
         }

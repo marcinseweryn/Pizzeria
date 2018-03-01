@@ -35,6 +35,9 @@ if ($result->num_rows > 0) {
                   color: 'red', 
                   display:'block',
                 });
+                $('#new-orders-info').css({
+                  display:'inline-block',
+                });
                 
                 var audio = new Audio('bell.mp3');
                 audio.play();
@@ -50,6 +53,9 @@ if ($result->num_rows > 0) {
                });
                $('#exclamation-icon').css({
                  display:'none',
+               });
+               $('#new-orders-info').css({
+                  display:'none',
                });
          </script>";
 }

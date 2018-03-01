@@ -12,7 +12,7 @@
                 <tr>
                   <th>Order ID</th>
                   <th>Surname</th>
-                  <th>Date</th>
+                  <th>Delivery address</th>
                   <th>Delivery</th>
                   <th>Completed</th>
                   <th>Uncompleted</th>
@@ -31,7 +31,7 @@
 	                <tr>
 	                  <td>{$orderDetail["order_id"]}</td>
 	                  <td>{$orderDetail["surname"]}</td>
-	                  <td>{$orderDetail["date"]}</td>
+	                  <td>{$orderDetail["delivery"]}</td>
 	                  <td><button form="ready" name="orderID" value="D{$orderDetail['order_id']}" class="btn btn-info btn-block">Delivery</button></td>
 	                  <td><button form="ready" name="orderID" value="C{$orderDetail['order_id']}" class="btn btn-success btn-block">Completed</button></td>
 	                  <td><button form="ready" name="orderID" value="U{$orderDetail['order_id']}" class="btn btn-danger btn-block">Uncompleted</button></td>

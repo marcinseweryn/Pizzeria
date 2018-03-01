@@ -63,7 +63,7 @@ class OrderDAO{
     
     public function updateOrderStateDeliveryByOrderID($state, $delivery, $orderID){
         
-        $record = getDB()->update("order", [
+        getDB()->update("order", [
             "date" => date('Y-m-d H:i:s'),
             "delivery" => $delivery,
             "state" => $state,
@@ -76,7 +76,8 @@ class OrderDAO{
             ["[><]user" => ["order.user_id" => "user_id"]],[
                 "order.order_id",
                 "user.surname",
-                "order.date"
+                "order.date",
+                "order.delivery"
             ], ["order.state" => $state,
                     "ORDER" => ["order.date" => "ASC"]
             ]);
@@ -86,7 +87,7 @@ class OrderDAO{
     
     public function updateOrderStateByOrderID($orderID,$state){
         
-        $record = getDB()->update("order", [
+        getDB()->update("order", [
             "state" => $state,
         ], ["order_id" => $orderID]);
     }

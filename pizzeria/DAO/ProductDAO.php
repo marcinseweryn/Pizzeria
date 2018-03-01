@@ -14,7 +14,6 @@ class ProductDAO{
         ], ["category" => "pizza"]);
         
         if($records != NULL){
-            $prizzas =[];
             foreach ($records as $record){
                 $pizza = new Product();
                 $pizza->productID = $record["product_id"];
@@ -32,7 +31,36 @@ class ProductDAO{
         }
     }
     
+    public function findAllProducts(){
+        
+        $records = getDB()->select("product", [
+            "product_id",
+            "category",
+            "name",
+            "price",
+            "description",
+        ], ["ORDER" => ["category" => "ASC"]]);
+        
+        if($records != NULL){
+            foreach ($records as $record){
+                $product = new Product();
+                $product->productID = $record["product_id"];
+                $product->category = $record["category"];
+                $product->name = $record["name"];
+                $product->price = $record["price"];
+                $product->description = $record["description"];
+                
+                $pizzas[] = $product;
+            }
+            
+            return $pizzas;
+        }else{
+            return NULL;
+        }
+    }
+    
     public function findProductByID($productID){
+        
         $record = getDB()->get("product", [
             "product_id",
             "category",
@@ -53,5 +81,32 @@ class ProductDAO{
         }else{
             return NULL;
         }
+    }
+    
+    public function createProduct(Product $product){
+        
+        getDB()->insert("product", [
+            "name" => $product->name,
+            "category" => $product->category,
+            "description" => $product->description,
+            "price" => $product->price
+        ]);
+    }
+    
+    public function deleteProductByID($productID){
+        
+        getDB()->delete("product", [
+            "product_id" => [$productID]
+        ]); 
+    }
+    
+    public function updateProduct(Product $product){
+        
+        getDB()->update("product", [
+            "name" => $product->name,
+            "category" => $product->category,
+            "description" => $product->description,
+            "price" => $product->price
+        ], ["product_id" => $product->productID]);
     }
 }
