@@ -92,5 +92,51 @@ class OrderDAO{
         ], ["order_id" => $orderID]);
     }
     
+    public function findOrdersInProgressByUserID($userID){
+        
+        $records = getDB()->select("order", [
+            "order_id",
+            "user_id",
+            "date",
+            "state",
+            "delivery"
+        ], ["AND" => [
+                "OR" => [
+                    "state" => "waiting",
+                    "OR" => [
+                        "state" => "queue",
+                        "OR" => [
+                            "state" => "preparing",
+                            "OR" => [
+                                "state" => "ready",
+                                "OR" => [
+                                    "state" => "sended"
+                                ]
+                            ]
+                        ]
+                     ]
+                 ],
+                "user_id" => $userID
+            ]    
+        ]);
+        
+        if($records != NULL){
+            foreach ($records as $record){    
+                $order = new Order();
+                $order->orderID = $record["order_id"];
+                $order->userID = $record["user_id"];
+                $order->date = $record["date"];
+                $order->state = $record["state"];
+                $order->delivery = $record["delivery"];
+                
+                $orders[] = $order;
+            }
+            
+            return $orders;
+        }else{
+            return NULL;
+        }
+    }
+    
     
 }

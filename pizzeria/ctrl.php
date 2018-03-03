@@ -38,8 +38,11 @@ switch ($action){
 	case 'user/order/confirm':
 	    control('/controllers/user/','ConfirmOrderController','generateView',['user']);
 	case 'user/order/completed':   
-	    
 	    control('/controllers/user/','CompletedOrderController','generateView',['user']);
+	case 'user/order-status':
+	    control('/controllers/user/','OrderStatusController','generateView',['user']);
+	    
+	    
 	case 'admin/home':
 	    control('/controllers/admin/','HomeController','generateView',['admin']);
 	case 'admin/products':
