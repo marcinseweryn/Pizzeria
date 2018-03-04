@@ -118,16 +118,7 @@
 			                                <tr>
 			                                    <td>{$orderProduct["name"]}</td>
 			                                    <td class="text-center">{$orderProduct["size"]}</td>
-			                                    {if $orderProduct["size"] == 'S'}
-			                                   		 <td class="text-center">{$orderProduct["price"]*0.7}</td>
-			                                   		 {$sum = $sum + $orderProduct["price"]*0.7}
-			                                    {elseif $orderProduct["size"] == 'M'}
-			                                   		 <td class="text-center">{$orderProduct["price"]}</td>
-			                                   		 {$sum = $sum + $orderProduct["price"]}
-			                                    {elseif $orderProduct["size"] == 'L'}
-			                                   		 <td class="text-center">{$orderProduct["price"]*1.4}</td>
-			                                   		 {$sum = $sum + $orderProduct["price"]*1.4}
-			                                    {/if}
+			                                    <td class="text-center">${$orderProduct["price"]}</td>
 			                                </tr>
 			                            {/strip}
 										{/foreach}

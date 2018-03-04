@@ -30,16 +30,7 @@
                <tr>
                  <td>{$orderProduct["name"]}</td>
                  <td>{$orderProduct["size"]}</td>
-                 {if $orderProduct["size"] == 'S'}
-                	<td class="text-center">{$orderProduct["price"]*0.7}</td>
-                 {$sum = $sum + $orderProduct["price"]*0.7}
-                 {elseif $orderProduct["size"] == 'M'}
-                 	<td class="text-center">{$orderProduct["price"]}</td>
-                 {$sum = $sum + $orderProduct["price"]}
-                 {elseif $orderProduct["size"] == 'L'}
-                	 <td class="text-center">{$orderProduct["price"]*1.4}</td>
-                 {$sum = $sum + $orderProduct["price"]*1.4}
-                 {/if}
+                 <td class="text-center">${$orderProduct["price"]}</td>
                </tr>
               {/strip}
               {/foreach}
@@ -50,7 +41,7 @@
        <div class="card-footer small text-muted"></div>
    </div>
   <hr>
-  <h4>Order sum: ${$sum}</h4>
+  <h4>Order sum: ${$order->sum}</h4>
   <hr>
   	<form action="{$conf->action_root}admin/orders/order-details-state" method="post">
   		<input type="hidden" name="from" value="{$from}" />

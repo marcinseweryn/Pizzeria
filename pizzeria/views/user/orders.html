@@ -28,7 +28,7 @@
 	                </div>
 	                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 		                <div class="dish-price">
-		                	<p>${$product->price*1.4}</p>
+		                	<p>${$product->price*1.3}</p>
 		                </div>
 	                </div>
                 </div>
@@ -109,16 +109,7 @@
 			                                <tr>
 			                                    <td>{$orderProduct["name"]}</td>
 			                                    <td class="text-center">{$orderProduct["size"]}</td>
-			                                    {if $orderProduct["size"] == 'S'}
-			                                   		 <td class="text-center">{$orderProduct["price"]*0.7}</td>
-			                                   		 {$sum = $sum + $orderProduct["price"]*0.7}
-			                                    {elseif $orderProduct["size"] == 'M'}
-			                                   		 <td class="text-center">{$orderProduct["price"]}</td>
-			                                   		 {$sum = $sum + $orderProduct["price"]}
-			                                    {elseif $orderProduct["size"] == 'L'}
-			                                   		 <td class="text-center">{$orderProduct["price"]*1.4}</td>
-			                                   		 {$sum = $sum + $orderProduct["price"]*1.4}
-			                                    {/if}
+			                                   	<td class="text-center">${$orderProduct["price"]}</td>
 			                                    <td class="text-center">
 			                                    	<button name="remove" value="{$orderProduct["order_product_id"]}" 
 			                                    	   style="background:transparent; border:none;" >

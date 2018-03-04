@@ -10,7 +10,8 @@ class OrderDAO{
             "user_id",
             "date",
             "state",
-            "delivery"
+            "delivery",
+            "sum"
         ], ["order_id" => $orderID]);
         
         if($record != NULL){
@@ -20,6 +21,7 @@ class OrderDAO{
             $order->date = $record["date"];
             $order->state = $record["state"];
             $order->delivery = $record["delivery"];
+            $order->sum = $record["sum"];
             
             return $order;
         }else{
@@ -33,7 +35,8 @@ class OrderDAO{
             "user_id" => $userID,
             "date" => date('Y-m-d H:i:s'),
             "delivery" => "new",
-            "state" => "new"
+            "state" => "new",
+            "sum" => 0
         ]);   
     }
     
@@ -44,7 +47,8 @@ class OrderDAO{
             "user_id",
             "date",
             "state",
-            "delivery"
+            "delivery",
+            "sum"
         ], ["state" => "new"]);
         
         if($record != NULL){
@@ -54,6 +58,7 @@ class OrderDAO{
             $order->date = $record["date"];
             $order->state = $record["state"];
             $order->delivery = $record["delivery"];
+            $order->sum = $record["sum"];
      
              return $order;
         }else{
@@ -77,7 +82,8 @@ class OrderDAO{
                 "order.order_id",
                 "user.surname",
                 "order.date",
-                "order.delivery"
+                "order.delivery",
+                "order.sum"
             ], ["order.state" => $state,
                     "ORDER" => ["order.date" => "ASC"]
             ]);
@@ -99,7 +105,8 @@ class OrderDAO{
             "user_id",
             "date",
             "state",
-            "delivery"
+            "delivery",
+            "sum"
         ], ["AND" => [
                 "OR" => [
                     "state" => "waiting",
@@ -128,6 +135,7 @@ class OrderDAO{
                 $order->date = $record["date"];
                 $order->state = $record["state"];
                 $order->delivery = $record["delivery"];
+                $order->sum = $record["sum"];
                 
                 $orders[] = $order;
             }
@@ -136,6 +144,55 @@ class OrderDAO{
         }else{
             return NULL;
         }
+    }
+    
+    public function findOrdersHistoryByUserID($userID){
+        
+        $records = getDB()->select("order", [
+            "order_id",
+            "user_id",
+            "date",
+            "state",
+            "delivery",
+            "sum"
+        ], ["AND" => [
+            "OR" => [
+                "state" => "reject",
+                "OR" => [
+                    "state" => "uncompleted",
+                    "OR" => [
+                        "state" => "completed",
+                    ]
+                ]
+            ],
+            "user_id" => $userID
+        ]
+        ]);
+        
+        if($records != NULL){
+            foreach ($records as $record){
+                $order = new Order();
+                $order->orderID = $record["order_id"];
+                $order->userID = $record["user_id"];
+                $order->date = $record["date"];
+                $order->state = $record["state"];
+                $order->delivery = $record["delivery"];
+                $order->sum = $record["sum"];
+                
+                $orders[] = $order;
+            }
+            
+            return $orders;
+        }else{
+            return NULL;
+        }
+    }
+    
+    public function updateOrderSumByOrderID($orderID,$sum){
+        
+        getDB()->update("order", [
+            "sum" => $sum,
+        ], ["order_id" => $orderID]);
     }
     
     

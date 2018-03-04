@@ -28,7 +28,7 @@
                   	<h3 class="menu-title">45cm</h3>
                   </div>
                   <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                  	<h3 class="menu-title">Rating</h3>
+                  	<h3 class="menu-title text-center">Order</h3>
                   </div>
                   <div class="menu-content">
                   
@@ -61,11 +61,8 @@
                                    		<p>${$pizza->price*1.4}</p>
                                		</div>
                                 </div>
-                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-3">
-                              		<span class="fa fa-star checked"></span>
-                                </div>
-								<div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-			                  		<button name="productID" value="{$pizza->productID}">order</button>
+								<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+			                  		<button name="productID" class="btn btn-success" value="{$pizza->productID}">order</button>
 								</div>
                       </div>
                       {/strip}

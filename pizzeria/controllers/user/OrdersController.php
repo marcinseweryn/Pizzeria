@@ -2,33 +2,40 @@
 require_once dirname(__FILE__).'/../../DAO/ProductDAO.php';
 require_once dirname(__FILE__).'/../../DAO/OrderDAO.php';
 require_once dirname(__FILE__).'/../../DAO/OrderProductDAO.php';
+require_once dirname(__FILE__).'/../../Service/OrderProductService.php';
+require_once dirname(__FILE__).'/../../Service/OrderService.php';
 require_once dirname(__FILE__).'/../../model/OrderProduct.php';
 
 class OrdersController{
     
-    private $orderProductDAO;
+    private $orderProductService;
     private $orderDAO;
     private $productDAO;
+    private $orderService;
     
     public function __construct(){
         $this->orderProductDAO = new OrderProductDAO();
         $this->orderDAO = new OrderDAO();
         $this->productDAO = new ProductDAO();
+        $this->orderService = new OrderService();
+        $this->orderProductService = new OrderProductService();
     }
     
     public function generateView(){
         $userID = getFromSessionUserID();
         $order = $this->orderDAO->findNewOrderByUserID($userID);
-        
+       
         if($order == NULL){
             $orderProductsDetails = NULL;
+            $sum = 0;
         }else{
-            $orderProductsDetails = $this->orderProductDAO->findOrderProductDetailsByOrderID($order->orderID);
+            $orderProductsDetails = $this->orderProductService->findOrderProductDetailsByOrderID($order->orderID);
+            $sum = $this->orderService->calculateOrderSum($order->orderID);
         }
         
         getSmarty()->assign('orderProductsDetails',$orderProductsDetails); 
         getSmarty()->assign('product',$this->productDAO->findProductByID(getFromRequest("productID")));
-        getSmarty()->assign('sum',0);
+        getSmarty()->assign('sum',$sum);
         
         getSmarty()->display(getConf()->root_path.'/views/user/orders.html');
     }
@@ -52,7 +59,7 @@ class OrdersController{
             $this->orderProductDAO->addProductToOrderProduct($orderProduct);       
             $this->generateView();
         }else{
-            forwardTo("user/menu");
+            redirectTo("user/menu");
         }  
     }
     
@@ -66,11 +73,11 @@ class OrdersController{
     public function sendOrder(){
 
         if(getFromPost("action")==="order"){
-            forwardTo("user/order/confirm");
+            redirectTo("user/order/confirm");
         }else{
             $order = $this->orderDAO->findNewOrderByUserID(getFromSessionUserID());
             $this->orderProductDAO->deleteProductFromOrderProductByOrderID($order->orderID);
-            forwardTo("user/menu");
+            redirectTo("user/menu");
         }
     }
 }

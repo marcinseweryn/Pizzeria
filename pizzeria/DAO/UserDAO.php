@@ -17,6 +17,21 @@ class UserDAO{
         ]);
     }
     
+    public function updateUser($user){
+        
+        getDB()->update("user", [
+            "name" => $user->name,
+            "surname" => $user->surname,
+            "password" => $user->password,
+            "city" => $user->city,
+            "address" => $user->address,
+            "postal_code" => $user->postalCode,
+            "phone" => $user->phone,
+            "email" => $user->email,
+            "role" => $user->role,
+        ],["user_id" => $user->userID]);
+    }
+    
     public function findAllUsers(){
         
         $records = getDB()->select("user", [

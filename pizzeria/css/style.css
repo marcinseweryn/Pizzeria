@@ -165,7 +165,7 @@ button.btn { margin-right: -1px; }
 /*Note: Section space help to create top bottom space;*/
 
 .space-small { padding-top: 40px; padding-bottom: 40px; }
-.space-medium { padding-top: 80px; padding-bottom: 80px; }
+.space-medium { padding-top: 80px; padding-bottom: 80px; min-height: 70vh; }
 .space-large { padding-top: 120px; padding-bottom: 120px; }
 .space-ex-large { padding-top: 140px; padding-bottom: 140px; }
 

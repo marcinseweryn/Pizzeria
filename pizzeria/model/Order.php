@@ -7,4 +7,5 @@ class Order{
     public $date;
     public $state;
     public $delivery;
+    public $sum;
 }

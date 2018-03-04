@@ -6,7 +6,7 @@
 
     <div class="container">
     	{if $orders == NULL}
-    		<h1 class="text-center">No orders</h1>
+    		<h1 class="text-center">No history</h1>
     	{/if}
         {foreach $orders as $order}
 		{strip}
@@ -16,7 +16,7 @@
 	            	<h3 style="float:right;">Date: {$order->date}</h3>
 	            	<h1>Order: {$order->orderID}</h1>
 	            	<hr>
-	            	<h4>Status: Waiting for acceptance</h4>
+	            	<h4>Status: {$order->state}</h4>
 	            	<hr>
 	            	<h4>Delivery: {$order->delivery}</h4>
 	            	<hr>

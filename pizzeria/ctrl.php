@@ -41,6 +41,12 @@ switch ($action){
 	    control('/controllers/user/','CompletedOrderController','generateView',['user']);
 	case 'user/order-status':
 	    control('/controllers/user/','OrderStatusController','generateView',['user']);
+	case 'user/history':
+	    control('/controllers/user/','HistoryController','generateView',['user']);
+	case 'user/my-account':
+	    control('/controllers/user/','MyAccountController','generateView',['user']);
+	case 'user/my-account-update':
+	    control('/controllers/user/','MyAccountController','updateUser',['user']);
 	    
 	    
 	case 'admin/home':

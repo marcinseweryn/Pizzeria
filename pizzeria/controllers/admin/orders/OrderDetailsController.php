@@ -1,16 +1,16 @@
 <?php
 require_once dirname(__FILE__).'/../../../DAO/OrderDAO.php';
-require_once dirname(__FILE__).'/../../../DAO/OrderProductDAO.php';
+require_once dirname(__FILE__).'/../../../Service/OrderProductService.php';
 require_once dirname(__FILE__).'/../../../DAO/UserDAO.php';
 
 class OrderDetailsController{
     
-    private $orderProductDAO;
+    private $orderProductService;
     private $orderDAO;
     private $userDAO;
     
     public function __construct(){
-        $this->orderProductDAO = new OrderProductDAO();
+        $this->orderProductService = new OrderProductService();
         $this->orderDAO = new OrderDAO();
         $this->userDAO = new UserDAO();
     }
@@ -19,13 +19,11 @@ class OrderDetailsController{
     
         $order = $this->orderDAO->findOrderByOrderID(getFromPost("orderID", true));      
         $user = $this->userDAO->findUserByID($order->userID);
-        $orderProductsDetails = $this->orderProductDAO->findOrderProductDetailsByOrderID($order->orderID);
-        $sum = 0;
+        $orderProductsDetails = $this->orderProductService->findOrderProductDetailsByOrderID($order->orderID);
         
         getSmarty()->assign('orderProductsDetails',$orderProductsDetails); 
         getSmarty()->assign('order',$order); 
         getSmarty()->assign('user',$user); 
-        getSmarty()->assign('sum',$sum); 
         getSmarty()->assign('from',getFromPost("from", true)); 
         
         getSmarty()->display(getConf()->root_path.'/views/admin/orders/order-details.html');
