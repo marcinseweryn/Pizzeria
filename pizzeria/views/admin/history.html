@@ -2,8 +2,46 @@
 
 {block name=content}
 <div class="col-12">
-  <h1>Blank</h1>
-  <p>This is an example of a blank page that you can use as a starting point for creating new ones.</p>
+   <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> History</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Date</th>
+                  <th>State</th>
+                  <th>Sum</th>
+                  <th>Show</th>
+                </tr>
+              </thead>
+              <tbody>
+              	<form id="show" action="{$conf->action_root}admin/orders/order-details" method="post">
+	              	<input type="hidden" name="from" value="history" />
+	            </form>
+	            <form id="preparing" action="{$conf->action_root}admin/history-action" method="post">
+	              	
+	            </form>
+	              	{foreach $orders as $order}
+					{strip}
+	                <tr>
+	                  <td>{$order->orderID}</td>
+	                  <td>{$order->date}</td>
+	                  <td>{$order->state}</td>
+	                  <td>{$order->sum}</td>
+	                  <td><button form="show" name="orderID" value="{$order->orderID}" class="btn btn-primary btn-block">Show</button></td>
+	                </tr>
+	                {/strip}
+	                {/foreach}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer small text-muted"></div>
+    </div>
+   
 </div>
 
 {/block}

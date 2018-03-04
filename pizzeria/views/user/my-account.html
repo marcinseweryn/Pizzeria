@@ -1,4 +1,4 @@
-{extends file=$conf->root_path|cat:"/templates/main.html"}
+{extends file=$conf->root_path|cat:"/templates/user.html"}
 
 {block name=content}
 
@@ -11,7 +11,7 @@
                         <h2 class="mb50 text-center">My Account</h2>
 
                     </div>
-                    <form action="{$conf->action_root}my-account-update" method="post">
+                    <form action="{$conf->action_root}user/my-account-update" method="post">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <div class="form-group">
                                 <label class="control-label sr-only" for="name"> Name</label>
@@ -69,7 +69,7 @@
                             </div>
                         </div>
                         
-          				<input type="hidden" name="id" value="{$user->id}">
+          				<input type="hidden" name="id" value="{$user->userID}">
           				
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <button type="submit" name="update" class="btn btn-primary">Update</button>

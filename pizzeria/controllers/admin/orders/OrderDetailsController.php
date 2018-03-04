@@ -30,21 +30,27 @@ class OrderDetailsController{
     }
     
     public function action(){
-        $state = getFromPost("state", true);
-        $orderID = getFromPost("orderID", true);
-        $from = getFromPost("from",true);
-        $this->orderDAO->updateOrderStateByOrderID($orderID, $state);
         
-        if($from === "waiting"){
-            redirectTo("admin/orders/waiting-orders");
-        }else if($from === "queue"){
-            redirectTo("admin/orders/queue-of-orders");
-        }else if($from === "preparing"){
-            redirectTo("admin/orders/preparing-orders");
-        }else if($from === "ready"){
-            redirectTo("admin/orders/ready-orders");
-        }else if($from === "sended"){
-            redirectTo("admin/orders/sended-orders");
+        $from = getFromPost("from",true);
+        
+        if($from === "history"){
+            redirectTo("admin/history");
+        }else{
+            $state = getFromPost("state", true);
+            $orderID = getFromPost("orderID", true);
+            $this->orderDAO->updateOrderStateByOrderID($orderID, $state);
+            
+            if($from === "waiting"){
+                redirectTo("admin/orders/waiting-orders");
+            }else if($from === "queue"){
+                redirectTo("admin/orders/queue-of-orders");
+            }else if($from === "preparing"){
+                redirectTo("admin/orders/preparing-orders");
+            }else if($from === "ready"){
+                redirectTo("admin/orders/ready-orders");
+            }else if($from === "sended"){
+                redirectTo("admin/orders/sended-orders");
+            }
         }
     }
 }

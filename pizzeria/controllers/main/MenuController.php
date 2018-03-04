@@ -11,7 +11,9 @@ class MenuController{
     
     public function generateView(){
            
-        getSmarty()->assign('pizzas',$this->productDAO->findAllPizzas());
+        getSmarty()->assign('pizzas',$this->productDAO->findProductByCategory("pizza"));
+        getSmarty()->assign('drinks',$this->productDAO->findProductByCategory("drinks"));
+        getSmarty()->assign('fastFoods',$this->productDAO->findProductByCategory("fast food"));
         
         getSmarty()->display(getConf()->root_path.'/views/main/menu.html');
     }

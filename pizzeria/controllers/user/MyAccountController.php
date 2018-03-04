@@ -19,6 +19,7 @@ class MyAccountController{
     }
     
     public function updateUser(){    
+        $this->user->userID = getFromPost("id",true);
         $this->user->name = getFromRequest("name",true);
         $this->user->surname = getFromRequest("surname",true);
         $this->user->password = getFromRequest("password",true);

@@ -3,6 +3,45 @@ require_once dirname(__FILE__).'/../model/Order.php';
 
 class OrderDAO{
     
+    public function findOrdersHistory(){
+        
+        $records = getDB()->select("order", [
+            "order_id",
+            "user_id",
+            "date",
+            "state",
+            "delivery",
+            "sum"
+        ],  ["OR" => [
+                "OR" => [
+                    "state" => "completed",
+                    "OR" => [
+                        "state" => "uncompleted",
+                    ]
+                ],
+            "state" => "reject"
+        ]
+        ]);
+        
+        if($records != NULL){
+            foreach($records as $record){
+                $order = new Order();
+                $order->orderID = $record["order_id"];
+                $order->userID = $record["user_id"];
+                $order->date = $record["date"];
+                $order->state = $record["state"];
+                $order->delivery = $record["delivery"];
+                $order->sum = $record["sum"];
+                
+                $orders[] = $order;
+            
+            }
+            return $orders;
+        }else{
+            return NULL;
+        }
+    }
+    
     public function findOrderByOrderID($orderID){
         
         $record = getDB()->get("order", [

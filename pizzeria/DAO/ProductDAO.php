@@ -3,7 +3,7 @@ require_once dirname(__FILE__).'/../model/Product.php';
 
 class ProductDAO{ 
     
-    public function findAllPizzas(){
+    public function findProductByCategory($category){
         
         $records = getDB()->select("product", [
             "product_id",
@@ -11,21 +11,21 @@ class ProductDAO{
             "name",
             "price",
             "description",
-        ], ["category" => "pizza"]);
+        ], ["category" => $category]);
         
         if($records != NULL){
             foreach ($records as $record){
-                $pizza = new Product();
-                $pizza->productID = $record["product_id"];
-                $pizza->category = $record["category"];
-                $pizza->name = $record["name"];
-                $pizza->price = $record["price"];
-                $pizza->description = $record["description"];
+                $product = new Product();
+                $product->productID = $record["product_id"];
+                $product->category = $record["category"];
+                $product->name = $record["name"];
+                $product->price = $record["price"];
+                $product->description = $record["description"];
                 
-                $pizzas[] = $pizza;
+                $products[] = $product;
             }
             
-            return $pizzas;
+            return $products;
         }else{
             return NULL;
         }

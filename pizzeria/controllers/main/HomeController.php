@@ -11,7 +11,7 @@ class HomeController{
     
     public function generateView(){
         
-        getSmarty()->assign('pizzas',$this->productDAO->findAllPizzas());
+        getSmarty()->assign('pizzas',$this->productDAO->findProductByCategory("pizza"));
         getSmarty()->display(getConf()->root_path.'/views/main/home.html');
     }
 }

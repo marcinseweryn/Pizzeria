@@ -30,6 +30,7 @@ class UserDAO{
             "email" => $user->email,
             "role" => $user->role,
         ],["user_id" => $user->userID]);
+        
     }
     
     public function findAllUsers(){
